@@ -18,7 +18,9 @@ function reducer(state, action) {
       return { ...state, step: action.payload };
     case "reset":
       return initialState;
-  }
+      default:
+        throw new Error("Invalid action type")
+  } 
 }
 
 function App() {
@@ -47,7 +49,7 @@ function App() {
   }
 
   function inc() {
-    dispatch({ type: "inc" });
+    dispatch({ type: "inck" });
   }
 
   function dec() {
