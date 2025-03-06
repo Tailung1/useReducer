@@ -1,30 +1,9 @@
 import "./App.css";
 import { ChangeEvent, useReducer } from "react";
 
-const initialState = {
-  count: 0,
-  step: 1,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "inc":
-      return { ...state, count: state.count + state.step };
-    case "dec":
-      return { ...state, count: state.count - state.step };
-    case "setCount":
-      return { ...state, count: action.payload };
-    case "setStep":
-      return { ...state, step: action.payload };
-    case "reset":
-      return initialState;
-      default:
-        throw new Error("Invalid action type")
-  } 
-}
+import { reducer, initialState } from "./Reducer";
 
 function App() {
-  
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const { count, step } = state;
@@ -33,7 +12,6 @@ function App() {
   date.setDate(date.getDate() + count);
 
   function defineStep(event: ChangeEvent<HTMLInputElement>) {
-    // setStep(Number(event.target.value));
     dispatch({
       type: "setStep",
       payload: Number(event.target.value),
@@ -41,7 +19,6 @@ function App() {
   }
 
   function defineCount(event: ChangeEvent<HTMLInputElement>) {
-    // setCount(Number(event.target.value));
     dispatch({
       type: "setCount",
       payload: Number(event.target.value),
@@ -49,7 +26,7 @@ function App() {
   }
 
   function inc() {
-    dispatch({ type: "inck" });
+    dispatch({ type: "inc" });
   }
 
   function dec() {
@@ -57,10 +34,7 @@ function App() {
   }
 
   function reset() {
-    // setCount(0);
-    // setStep(0);
     dispatch({ type: "reset" });
-    // setStep(1);
   }
 
   return (
