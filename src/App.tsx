@@ -1,27 +1,7 @@
 import { ChangeEvent, useReducer } from "react";
-import DispachFunc from "./Reducer";
+import { reducer } from "./Reducer";
 
 const initialState = { count: 0, step: 1 };
-
-
-
-
-function reducer(state: TState, action: TAction): TState {
-  switch (action.type) {
-    case "inc":
-      return { ...state, count: state.count + state.step };
-    case "dec":
-      return { ...state, count: state.count - state.step };
-    case "updateStep":
-      return { ...state, step: action.payload };
-      case "defineCount":
-        return {...state,count:action.payload}
-    case "reset":
-      return { count: 0, step: 1 };
-    default:
-      throw new Error("Something went Wrong");
-  }
-}
 
 export default function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -35,11 +15,14 @@ export default function App() {
   function dec() {
     dispatch({ type: "dec" });
   }
-  //   function inc() {
-  //     dispatch({ type: "inc" });
-  //   }
-  function defineCount(e:ChangeEvent<HTMLInputElement>) {
-    dispatch({type:"defineCount",payload:Number(e.target.value)});
+  function inc() {
+    dispatch({ type: "inc" });
+  }
+  function defineCount(e: ChangeEvent<HTMLInputElement>) {
+    dispatch({
+      type: "defineCount",
+      payload: Number(e.target.value),
+    });
   }
   function reset() {
     dispatch({ type: "reset" });
@@ -56,10 +39,10 @@ export default function App() {
       <div>
         <button onClick={dec}>-</button>
         <input type='text' value={count} onChange={defineCount} />
+        <button onClick={inc}>+</button>
       </div>
       <button onClick={reset}>Reset</button>
       {date.toDateString()}
-      <DispachFunc dispatch={dispatch} />
     </div>
   );
 }
