@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
-import { Reducer } from "react";
+import  { useState } from "react";
 
 export default function App() {
   const [step, setStep] = useState<number>(1);
@@ -15,13 +14,9 @@ export default function App() {
       />{" "}
       {step}
       <div>
-        <button onClick={() => setCount(count - step)}>
-          Descrease
-        </button>
+        <button onClick={() => setCount(count - step)}>-</button>
         <input type='text' value={count} />
-        <button onClick={() => setCount(count + step)}>
-          Increase
-        </button>
+        <button onClick={() => setCount(count + step)}>+</button>
       </div>
     </div>
   );
