@@ -1,4 +1,5 @@
-import { ChangeEvent, useReducer, } from "react";
+import { ChangeEvent, useReducer } from "react";
+import DispachFunc from "./Reducer";
 
 const initialState = { count: 0, step: 1 };
 
@@ -39,9 +40,9 @@ export default function App() {
   function dec() {
     dispatch({ type: "dec" });
   }
-  function inc() {
-    dispatch({ type: "inc" });
-  }
+  //   function inc() {
+  //     dispatch({ type: "inc" });
+  //   }
   function reset() {
     dispatch({ type: "reset" });
   }
@@ -57,10 +58,10 @@ export default function App() {
       <div>
         <button onClick={dec}>-</button>
         <input type='text' value={count} />
-        <button onClick={inc}>+</button>
       </div>
       <button onClick={reset}>Reset</button>
       {date.toDateString()}
+      <DispachFunc dispatch={dispatch} />
     </div>
   );
 }
