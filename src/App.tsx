@@ -3,15 +3,8 @@ import DispachFunc from "./Reducer";
 
 const initialState = { count: 0, step: 1 };
 
-type TState = {
-  count: number;
-  step: number;
-};
-type TAction =
-  | { type: "inc" }
-  | { type: "dec" }
-  | { type: "updateStep"; payload: number }
-  | { type: "reset" };
+
+
 
 function reducer(state: TState, action: TAction): TState {
   switch (action.type) {
@@ -21,6 +14,8 @@ function reducer(state: TState, action: TAction): TState {
       return { ...state, count: state.count - state.step };
     case "updateStep":
       return { ...state, step: action.payload };
+      case "defineCount":
+        return {...state,count:action.payload}
     case "reset":
       return { count: 0, step: 1 };
     default:
@@ -43,6 +38,9 @@ export default function App() {
   //   function inc() {
   //     dispatch({ type: "inc" });
   //   }
+  function defineCount(e:ChangeEvent<HTMLInputElement>) {
+    dispatch({type:"defineCount",payload:Number(e.target.value)});
+  }
   function reset() {
     dispatch({ type: "reset" });
   }
@@ -57,7 +55,7 @@ export default function App() {
       {step}
       <div>
         <button onClick={dec}>-</button>
-        <input type='text' value={count} />
+        <input type='text' value={count} onChange={defineCount} />
       </div>
       <button onClick={reset}>Reset</button>
       {date.toDateString()}
